@@ -7,8 +7,8 @@ from a 'business' point of view.
 ---
 
 So, for this project you need to install Gauge, create a Gauge_Home folder and add 'GAUGE_HOME' sys environment in 
-system variables. Install html-report, python and screenshot using `gauge install {package_name}`. Then test with 
-`gauge --version`
+system variables. Install html-report, python and screenshot using `gauge install {package_name}`. Test using 
+`gauge --version` command to verify the installed plugins on your device.
 ```commandline
 PS E:\Python\bitedender-interviu> gauge --version
 Gauge version: 1.4.3

@@ -13,6 +13,11 @@ class Driver:
 @before_suite
 def init():
     global driver
+    """
+    ChromeDriver will be automatically installed for a specific section
+    Why? To not depend on a specific version for your browser, to not download after a Google Chrome update another
+    version of ChromeDriver
+    """
     chromedriver_autoinstaller.install()
     Driver.instance = webdriver.Chrome()
     Driver.instance.get("https:\\google.com")
