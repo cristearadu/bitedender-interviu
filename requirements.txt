@@ -2,3 +2,4 @@ getgauge
 selenium
 protobuf==3.20.*
 chromedriver-autoinstaller
+webdriver-manager
