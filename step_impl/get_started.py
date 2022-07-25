@@ -1,42 +1,20 @@
-import os
-import chromedriver_autoinstaller
-from getgauge.python import before_suite, after_suite, step
-from selenium import webdriver
+from getgauge.python import step
 from selenium.webdriver.common.keys import Keys
-from uuid import uuid1
 from getgauge.python import custom_screenshot_writer
 from core_elements.logging_element import logger
-from settings import ROOT_WORKING_DIRECTORY
+from step_impl.utils import Driver
 
-class Driver:
-    instance = None
 
-@before_suite
-def init():
-    global driver
-    """
-    ChromeDriver will be automatically installed for a specific section
-    Why? To not depend on a specific version for your browser, to not download after a Google Chrome update another
-    version of ChromeDriver
-    """
-    chromedriver_autoinstaller.install()
-    Driver.instance = webdriver.Chrome()
-    Driver.instance.get("https:\\google.com")
-
-@after_suite
-def close():
-    Driver.instance.close()
-
-@step("Search for <query>")
-def go_to_get_started_page(query):
-    logger.info("Searching for first element")
-    button = Driver.instance.find_element("xpath", '//*[@id="L2AGLb"]/div')
-    button.click()
-    textbox = Driver.instance.find_element("xpath", "//input[@name='q']")
-    logger.info(f"Sending {query}")
-    textbox.send_keys(query)
-    textbox.send_keys(Keys.RETURN)
-    # take_screenshot()
+# @step("Search for <query>")
+# def go_to_get_started_page(query):
+#     logger.info("Searching for first element")
+#     button = Driver.driver.find_element("xpath", '//a[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
+#     button.click()
+#     # textbox = Driver.driver.instance.find_element("xpath", "//input[@name='q']")
+#     # logger.info(f"Sending {query}")
+#     # textbox.send_keys(query)
+#     # textbox.send_keys(Keys.RETURN)
+#     # take_screenshot()
 
 # # Return a screenshot file name
 # @custom_screenshot_writer

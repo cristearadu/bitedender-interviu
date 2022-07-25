@@ -2,6 +2,7 @@ import os
 
 
 ROOT_WORKING_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+WEBSITE = 'https://www.bitdefender.ro/'
 
 
 class Timeouts(object):
@@ -10,7 +11,7 @@ class Timeouts(object):
     MEDIUM = 180
     HIGH = 240
     TIMEOUT_DEFAULT: int = 15
-    WAIT_TO_DISAPPEAR: int =60
+    WAIT_TO_DISAPPEAR: int = 60
     CHECK: int = 3
     FAST_CHECK: int = 1
     IMPLICITLY_WAIT: int = 0.1
