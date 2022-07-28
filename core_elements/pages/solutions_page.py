@@ -31,14 +31,24 @@ class Solutions(BasePage):
     def click_cumpara_premium_security(self):
         Button(self.BUY_PREMIUM_SECURITY).click()
 
-    def get_price_information(self):
-        old_price = TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=1))
-        discount = TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=2))
-        new_price = TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=3))
+    @property
+    def old_price(self):
+        return TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=1))
 
-        return {'prices': {
-                        'old_price': old_price.contents,
-                        'discount': discount.contents,
-                        'new_price': new_price.contents
-        }
-        }
+    @property
+    def discount(self):
+        return TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=2))
+
+    @property
+    def new_price(self):
+        return TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=3))
+
+    def get_price_information_premium_security(self):
+        """
+        Returns dictionary with price information for 'PREMIUM SECURITY'
+        All values are 'STR'
+        """
+        return {'old_price': self.old_price.contents,
+                'discount': self.discount.contents,
+                'last_price': self.new_price.contents
+                }
