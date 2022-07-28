@@ -1,4 +1,3 @@
-import os
 from getgauge.python import before_scenario, after_scenario
 from step_impl.utils.init_driver import Driver
 from settings import WEBSITE
@@ -19,7 +18,5 @@ def close_driver_after_scenario():
 
 def check_token():
     if Driver.driver.check_exists(Token.TOKEN_BUTTON):
-        home_screen_page = Token()
-        home_screen_page.click_token()
-        Driver.driver.wait_for_element_to_be_invisible(home_screen_page.TOKEN_BUTTON)
-
+        token_screen = Token()
+        token_screen.click_and_wait_for_token_to_disappear()

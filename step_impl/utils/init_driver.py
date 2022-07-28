@@ -1,8 +1,7 @@
-import sys
 from core_elements import CustomWebDriver
 
 
-class Driver(object):
+class Driver:
     driver: CustomWebDriver = None
 
     @staticmethod

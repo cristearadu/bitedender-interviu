@@ -1,9 +1,8 @@
 from retry import retry
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from core_elements.logging_element import logger
 from core_elements.models.elements import Button
 from step_impl.utils import Driver
+from core_elements.project_decorators import log_click_button
 
 
 class HomeScreenPage:
@@ -16,6 +15,11 @@ class HomeScreenPage:
         self.driver.wait_for_element_to_be_visible(self.MAIN_MENU_LOGO)
         self.driver.wait_for_element_to_be_visible(self.HOME_SOLUTIONS_BUTTON)
 
+    @retry(tries=3, delay=1)
+    @log_click_button
+    def click_home_solutions_button(self):
+        return Button(self.HOME_SOLUTIONS_BUTTON).click()
+
 
 class Token:
     TOKEN_BUTTON = (By.XPATH, '//a[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
@@ -24,5 +28,10 @@ class Token:
         self.driver = Driver.driver
 
     @retry(tries=3, delay=1)
+    @log_click_button
     def click_token(self):
         Button(self.TOKEN_BUTTON).click()
+
+    def click_and_wait_for_token_to_disappear(self):
+        self.click_token()
+        self.driver.wait_for_element_to_be_invisible(self.TOKEN_BUTTON)

@@ -1,12 +1,11 @@
 from getgauge.python import step
-from selenium.webdriver.common.keys import Keys
-from getgauge.python import custom_screenshot_writer
-from core_elements.logging_element import logger
 from step_impl.utils import Driver
 from core_elements.pages.home_screen_page import HomeScreenPage
+from core_elements.pages.solutions_page import Solutions
 
 
 @step("Navigate to home screen -> See solutions")
 def navigate_to_see_solutions():
-    button = Driver.driver.find_element("xpath", '//div[@id="Home"]/div/div[2]/div/a')
-    button.click()
+    home_screen = HomeScreenPage()
+    home_screen.click_home_solutions_button()
+    assert Driver.driver.check_exists(Solutions.MULTIPLATFORM), "Failed to load \'Solutions\' page"

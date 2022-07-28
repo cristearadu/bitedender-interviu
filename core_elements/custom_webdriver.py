@@ -1,9 +1,5 @@
 from selenium import webdriver
-from selenium.common.exceptions import (
-    WebDriverException,
-    TimeoutException,
-    NoSuchElementException
-)
+from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
@@ -27,7 +23,7 @@ class CustomWebDriver(webdriver.Chrome):
 
         self.implicitly_wait(Timeouts.IMPLICITLY_WAIT)
 
-    def wait_for_element_to_be_invisible(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT):
+    def wait_for_element_to_be_invisible(self, locator, timeout: int = Timeouts.WAIT_TO_DISAPPEAR):
         WebDriverWait(self, timeout).until(EC.invisibility_of_element_located(locator))
 
     def wait_for_element_to_be_visible(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT):
@@ -45,7 +41,7 @@ class CustomWebDriver(webdriver.Chrome):
         except TimeoutException:
             return False
         return True
-    ####################################################################################################################
+####################################################################################################################
     """
     Unused functions for webdriver, but implemented for framework
     """
@@ -55,4 +51,3 @@ class CustomWebDriver(webdriver.Chrome):
 
     def switch_tab(self, tab_number: int):
         self.switch_to.window(self.window_handles[tab_number - 1])
-
