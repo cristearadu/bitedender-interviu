@@ -1,3 +1,4 @@
+import sys
 from core_elements import CustomWebDriver
 
 
@@ -6,6 +7,7 @@ class Driver:
 
     @staticmethod
     def init_driver():
+        sys.stdout.reconfigure(encoding='utf-8')
         Driver.close_driver()
         if not Driver.driver:
             Driver.driver = CustomWebDriver()

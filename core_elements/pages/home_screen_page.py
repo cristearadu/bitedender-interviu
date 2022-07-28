@@ -1,16 +1,16 @@
 from retry import retry
 from selenium.webdriver.common.by import By
 from core_elements.models.elements import Button
-from step_impl.utils import Driver
 from core_elements.project_decorators import log_click_button
+from core_elements.pages.base_page import BasePage
 
 
-class HomeScreenPage:
+class HomeScreenPage(BasePage):
     MAIN_MENU_LOGO = (By.XPATH, '//div[@id="MainMenu|BitdefenderLogo"]/a')
     HOME_SOLUTIONS_BUTTON = (By.XPATH, '//div[@id="Home"]/div/div[2]/div/a')
 
     def __init__(self):
-        self.driver = Driver.driver
+        super(HomeScreenPage, self).__init__()
 
         self.driver.wait_for_element_to_be_visible(self.MAIN_MENU_LOGO)
         self.driver.wait_for_element_to_be_visible(self.HOME_SOLUTIONS_BUTTON)
@@ -21,11 +21,11 @@ class HomeScreenPage:
         return Button(self.HOME_SOLUTIONS_BUTTON).click()
 
 
-class Token:
+class Token(BasePage):
     TOKEN_BUTTON = (By.XPATH, '//a[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
 
     def __init__(self):
-        self.driver = Driver.driver
+        super(Token, self).__init__()
 
     @retry(tries=3, delay=1)
     @log_click_button
