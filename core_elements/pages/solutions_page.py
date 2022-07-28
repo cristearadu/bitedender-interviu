@@ -32,7 +32,13 @@ class Solutions(BasePage):
         Button(self.BUY_PREMIUM_SECURITY).click()
 
     def get_price_information(self):
-        import pdb; pdb.set_trace()
-        old_price = self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=1)
-        discount = self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=2)
-        new_price = self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=3)
+        old_price = TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=1))
+        discount = TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=2))
+        new_price = TextBox(self.driver.get_locator_by_index(self.PRICE_INFORMATION, index=3))
+
+        return {'prices': {
+                        'old_price': old_price.contents,
+                        'discount': discount.contents,
+                        'new_price': new_price.contents
+        }
+        }

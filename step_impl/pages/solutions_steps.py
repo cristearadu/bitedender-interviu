@@ -26,8 +26,8 @@ def verify_text_is_selected(text_to_verify):
     logger.info(f"{premium_security.text} has been selected")
 
     logger.info(f"Storing the price for {text_to_verify}")
-    solutions_page.get_price_information()
-
+    prices = solutions_page.get_price_information()
+    import pdb; pdb.set_trace()
 
 @step("Verify the correct price has been displayed in cart")
 def verify_correct_price():
