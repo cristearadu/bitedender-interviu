@@ -29,7 +29,7 @@ class Solutions(BasePage):
     @retry(tries=3, delay=1)
     @log_click_button
     def click_cumpara_premium_security(self):
-        Button(self.BUY_PREMIUM_SECURITY).click()
+        Button(self.BUY_PREMIUM_SECURITY).click(check_element=True)
 
     @property
     def old_price(self):

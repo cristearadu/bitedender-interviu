@@ -1,1 +1,1 @@
-from .currency_functions import check_same_currency
+from .currency_functions import CurrencyFunctions

@@ -5,6 +5,7 @@ Gauge. So, this testing framework is used in "Specification by Example". The tes
 from a 'business' point of view. 
 
 ---
+`pip install -r requirements.txt` - to install the libraries for this framework
 
 So, for this project you need to install Gauge, create a Gauge_Home folder and add 'GAUGE_HOME' sys environment in 
 system variables. Install html-report, python and screenshot using `gauge install {package_name}`. Test using 
@@ -22,4 +23,6 @@ python (0.3.17)
 screenshot (0.1.0)
 ```
 ---
-To run the project install the requirements from requirements file: `pip install -r requirements.txt`
+How to run the project
+---
+To run the project use this command: `gauge run .\specs\multiplatform_scenarios.spec`

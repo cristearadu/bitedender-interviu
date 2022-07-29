@@ -2,7 +2,7 @@ from getgauge.python import step
 from core_elements.pages.cart_page import Cart
 from core_elements.logging_element import logger
 from getgauge.python import data_store
-from core_elements.algos import check_same_currency
+from core_elements.algos import CurrencyFunctions
 
 """
                 ###### VERIFY/ASSERTS STEPS ######
@@ -32,24 +32,36 @@ def verify_product_name():
 
 
 @step("Verify the correct price and product has been displayed in cart")
-def verify_correct_data():
+def verify_price_and_data_on_cart():
     cart_page = Cart()
     logger.info("Reading product price from cart")
     cart_prices = cart_page.get_price_information_one_product()
     logger.info(f"Cart prices: {cart_prices}")
 
     try:
-        for price_type, price_value in cart_prices.items():
+        currency_function = CurrencyFunctions()
 
-            assert check_same_currency(price_value, data_store.scenario['prices'][price_type]), \
-                f"Failed to match the currency for product in cart for {price_type}." \
-                f"\nExpected results: {price_value}" \
-                f"\nActual results: {data_store.scenario['prices'][price_type]}"
+        for cart_price_type, cart_price_value in cart_prices.items():
 
-            assert price_value == data_store.scenario['prices'][price_type], \
-                f"Failed to match the price for product in cart for {price_type}." \
-                f"\nExpected results: {price_value}" \
-                f"\nActual results: {data_store.scenario['prices'][price_type]}"
+            data_store_price = data_store.scenario['prices'][cart_price_type]
+
+            logger.info(f"Comparing the price from store {data_store_price} "
+                        f"with the price from cart {cart_price_value}")
+
+            assert currency_function.check_same_currency(cart_price_value, data_store_price), \
+                f"Failed to match the currency for product in cart for {cart_price_type}." \
+                f"\nExpected results: {cart_price_value}" \
+                f"\nActual results: {data_store_price}"
+
+            cart_price_value = currency_function.remove_price_currency(cart_price_value)
+            data_store_price = currency_function.remove_price_currency(data_store_price)
+
+            assert cart_price_value == data_store_price, \
+                f"Failed to match the price for product in cart for {cart_price_type}." \
+                f"\nExpected results: {cart_price_value}" \
+                f"\nActual results: {data_store_price}"
 
     except KeyError as e:
         raise KeyError(f"Failed to find the expected key in data_store dictionary: {repr(e)}")
+
+    logger.info("The correct price and product has been displayed in cart")

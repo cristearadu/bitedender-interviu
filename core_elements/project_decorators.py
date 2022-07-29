@@ -2,6 +2,9 @@ from core_elements.logging_element import logger
 
 
 def log_click_button(function_click):
+    """
+    Wrapper used for when clicking a button inside a class to specifiy which button is clicked
+    """
     def wrapper(*args, **kwargs):
         function_name = str(function_click.__name__)
         function_name = function_name.replace('click_', '')

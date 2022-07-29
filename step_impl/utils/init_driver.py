@@ -7,7 +7,7 @@ class Driver:
 
     @staticmethod
     def init_driver():
-        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stdout.reconfigure(encoding='utf-8')  # to make romanian characters readable
         Driver.close_driver()
         if not Driver.driver:
             Driver.driver = CustomWebDriver()

@@ -12,6 +12,7 @@ class WebElement(object):
     def __init__(self, locator, timeout=Timeouts.MEDIUM):
         self.driver = Driver.driver
         self.locator = locator
+        self.timeout = timeout
         self.wait = WebDriverWait(self.driver, timeout)
         self.wait.until(EC.visibility_of_element_located(self.locator))
 
@@ -46,10 +47,14 @@ class Button(WebElement):
         self.driver.wait_for_element_to_be_clickable(self.locator)
 
     @retry(tries=3, delay=1)
-    def click(self):
+    def click(self, check_element=False):
         self.scroll_to_element()
         try:
             self.element.click()
+            if check_element:
+                if self.driver.check_exists(self.locator, timeout=Timeouts.SMALL):
+                    self.element.click()
+
         except ElementClickInterceptedException:
             logger.error("Failed to click on element with Selenium Click.")
             self.javascript_click()

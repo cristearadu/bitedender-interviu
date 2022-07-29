@@ -3,6 +3,7 @@ import os
 
 ROOT_WORKING_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 WEBSITE = 'https://www.bitdefender.ro/'
+LOGS_FOLDER = 'logs_folder'
 
 
 class Timeouts(object):

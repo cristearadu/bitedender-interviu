@@ -52,7 +52,7 @@ class CustomWebDriver(webdriver.Chrome):
         locator_tuple = tuple(locator_list)
         return locator_tuple
 
-####################################################################################################################
+########################################
     """
     Unused functions for webdriver, but implemented for framework
     """
