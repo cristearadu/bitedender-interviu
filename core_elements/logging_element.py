@@ -1,11 +1,13 @@
 import logging
 import os
 from datetime import datetime
-from settings import ROOT_WORKING_DIRECTORY
-LOGS_FOLDER = 'logs_folder'
+from settings import ROOT_WORKING_DIRECTORY, LOGS_FOLDER
 
 
 def create_logs():
+    """
+    Function that creates logs on ROOT_WORKING_DIRECTORY\output\logs
+    """
     results_path = f"{ROOT_WORKING_DIRECTORY}/output/{LOGS_FOLDER}"
     if not os.path.exists(results_path):
         os.makedirs(results_path)

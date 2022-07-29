@@ -41,7 +41,18 @@ class CustomWebDriver(webdriver.Chrome):
         except TimeoutException:
             return False
         return True
-####################################################################################################################
+
+    def get_locator_by_index(self, locator, index=1):
+        """
+        Function that converts a locator by index and returns an xpath like:
+        (By.XPATH, (.//original_xpath)[index])
+        """
+        locator_list = list(locator)
+        locator_list[1] = f"({locator_list[1]})[{str(index)}]"
+        locator_tuple = tuple(locator_list)
+        return locator_tuple
+
+########################################
     """
     Unused functions for webdriver, but implemented for framework
     """
