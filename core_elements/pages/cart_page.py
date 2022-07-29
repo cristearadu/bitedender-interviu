@@ -19,7 +19,7 @@ class Cart(BasePage):
 
     @retry(tries=3, delay=1)
     @log_click_button
-    def remove_product(self):
+    def click_remove_product(self):
         Button(self.REMOVE_PRODUCT).click()
 
     @property
