@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from core_elements.models.elements import Button, TextBox
 from core_elements.project_decorators import log_click_button
 from core_elements.pages.base_page import BasePage
+from settings import Timeouts
 
 
 class Solutions(BasePage):
@@ -10,12 +11,13 @@ class Solutions(BasePage):
     MULTIPLATFORM = (By.XPATH, '//a[@id="mp-scroll"]/span')
     PREMIUM_SECURITY = (By.XPATH, '//div[@id="MultiplatformSecurity"]//h3[contains(text(), "PREMIUM SECURITY")]')
     BUY_PREMIUM_SECURITY = (By.XPATH, f'{PREMIUM_SECURITY[1]}/..//a[contains(text(), "Cumpără")]')
+    BUY_PREMIUM_SECURITY_2 = (By.XPATH, '//div[@id="MultiplatformSecurity"]/div[2]/div[1]/a[1]')
     PRICE_INFORMATION = (By.XPATH, f'{PREMIUM_SECURITY[1]}/../div/span')
 
     def __init__(self):
         super(Solutions, self).__init__()
 
-        self.driver.wait_for_element_to_be_visible(self.MULTIPLATFORM)
+        self.driver.wait_for_element_to_be_visible(self.MULTIPLATFORM, timeout=Timeouts.MEDIUM)
 
     @retry(tries=3, delay=1)
     @log_click_button
@@ -26,10 +28,14 @@ class Solutions(BasePage):
     def premium_security(self):
         return TextBox(self.PREMIUM_SECURITY)
 
+    @property
+    def buy_premium_security(self):
+        return Button(self.BUY_PREMIUM_SECURITY_2)
+
     @retry(tries=3, delay=1)
     @log_click_button
     def click_cumpara_premium_security(self):
-        Button(self.BUY_PREMIUM_SECURITY).click(check_element=True)
+        self.buy_premium_security.click(check_element=True)
 
     @property
     def old_price(self):

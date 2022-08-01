@@ -18,7 +18,8 @@ def click_on_buy_product(product):
     solutions_page = Solutions()
     logger.info(f"Buying product {product}")
     solutions_page.click_cumpara_premium_security()
-    assert Driver.driver.check_exists(Cart.FINAL_PRICE, timeout=Timeouts.WAIT_TO_DISAPPEAR), "Failed to load \'Cart\' page"
+    assert Driver.driver.check_exists(Cart.FINAL_PRICE, timeout=Timeouts.WAIT_TO_DISAPPEAR), \
+        "Failed to load \'Cart\' page"
 
 
 @step("Store prices for <product>")
@@ -47,6 +48,7 @@ def store_prices_for_product(product):
 def verify_text_is_selected(text_to_verify):
     solutions_page = Solutions()
     premium_security = solutions_page.premium_security
-    assert premium_security.text == text_to_verify, f"Failed to find the selected text: {text_to_verify}. " \
-                                                    f"Found {premium_security.text}"
+
+    assert premium_security.text.lower() == text_to_verify.lower(), \
+        f"Failed to find the selected text: {text_to_verify}. Found {premium_security.text}"
     logger.info(f"{premium_security.text} has been selected")

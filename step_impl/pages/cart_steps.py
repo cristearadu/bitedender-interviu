@@ -13,12 +13,6 @@ def delete_product_from_cart():
     logger.info("Removing the product")
     cart_page.click_remove_product()
 
-
-@step("Change the product quantity to <quantity_value>")
-def change_product_quantity(quantity_value):
-    pass
-
-
 """
                 ###### VERIFY/ASSERTS STEPS ######
 """
@@ -78,11 +72,6 @@ def verify_price_and_data_on_cart():
             raise KeyError(f"Failed to find the expected key in data_store dictionary: {repr(e)}")
 
     logger.info("The correct price and product has been displayed in cart")
-
-
-@step("Verify the correct price for quantity change of <quantity_value>")
-def verify_correct_price_for_quantity(quantity_value):
-    pass
 
 
 @step("Verify if the webpage has returned to product page")
