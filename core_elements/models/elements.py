@@ -52,6 +52,7 @@ class Button(WebElement):
         try:
             self.element.click()
             if check_element:
+                logger.info(f"Checking if element {self.locator} has been correctly pressed")
                 if self.driver.check_exists(self.locator, timeout=Timeouts.SMALL):
                     self.element.click()
 

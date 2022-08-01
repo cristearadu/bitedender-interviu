@@ -1,8 +1,17 @@
 from getgauge.python import step
 from core_elements.pages.cart_page import Cart
+from core_elements.pages.solutions_page import Solutions
 from core_elements.logging_element import logger
 from getgauge.python import data_store
 from core_elements.algos import CurrencyFunctions
+from step_impl.utils import Driver
+
+
+@step("Delete the product from cart")
+def delete_product_from_cart():
+    cart_page = Cart()
+    logger.info("Removing the product")
+    cart_page.click_remove_product()
 
 """
                 ###### VERIFY/ASSERTS STEPS ######
@@ -38,11 +47,9 @@ def verify_price_and_data_on_cart():
     cart_prices = cart_page.get_price_information_one_product()
     logger.info(f"Cart prices: {cart_prices}")
 
-    try:
-        currency_function = CurrencyFunctions()
-
-        for cart_price_type, cart_price_value in cart_prices.items():
-
+    currency_function = CurrencyFunctions()
+    for cart_price_type, cart_price_value in cart_prices.items():
+        try:
             data_store_price = data_store.scenario['prices'][cart_price_type]
 
             logger.info(f"Comparing the price from store {data_store_price} "
@@ -61,7 +68,13 @@ def verify_price_and_data_on_cart():
                 f"\nExpected results: {cart_price_value}" \
                 f"\nActual results: {data_store_price}"
 
-    except KeyError as e:
-        raise KeyError(f"Failed to find the expected key in data_store dictionary: {repr(e)}")
+        except KeyError as e:
+            raise KeyError(f"Failed to find the expected key in data_store dictionary: {repr(e)}")
 
     logger.info("The correct price and product has been displayed in cart")
+
+
+@step("Verify if the webpage has returned to product page")
+def verify_session_in_product_page():
+    assert Driver.driver.check_exists(Solutions.MULTIPLATFORM), "Failed to load \'Solutions\' page"
+    logger.info("\'Solutions\' page has been loaded correctly, the product has been removed from cart.")

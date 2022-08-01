@@ -1,0 +1,13 @@
+# From HOMEPAGE insert into cart <product_name> and verify it has the correct price displayed in cart
+
+* Navigate to home screen -> See solutions
+* Click to buy <product_name>
+
+
+# Click to buy <product_name>
+* Find and click Multiplatform
+* Verify if <product_name> is selected for multiplatform
+* Store prices for <product_name>
+* Click on buy product <product_name>
+* Verify that product name is correct
+* Verify the correct price and product has been displayed in cart
