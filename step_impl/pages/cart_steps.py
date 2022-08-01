@@ -13,6 +13,7 @@ def delete_product_from_cart():
     logger.info("Removing the product")
     cart_page.click_remove_product()
 
+
 """
                 ###### VERIFY/ASSERTS STEPS ######
 """

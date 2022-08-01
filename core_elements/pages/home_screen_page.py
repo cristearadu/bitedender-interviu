@@ -6,6 +6,7 @@ from core_elements.pages.base_page import BasePage
 
 
 class HomeScreenPage(BasePage):
+
     MAIN_MENU_LOGO = (By.XPATH, '//div[@id="MainMenu|BitdefenderLogo"]/a')
     HOME_SOLUTIONS_BUTTON = (By.XPATH, '//div[@id="Home"]/div/div[2]/div/a')
 

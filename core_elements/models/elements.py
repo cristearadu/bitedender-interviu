@@ -8,7 +8,17 @@ from core_elements.logging_element import logger
 
 
 class WebElement(object):
+    """
+    Base class for Web Elements
 
+    Defined a few functions suchs as:
+        - element
+        - text
+        - scroll to element
+        - find element
+        - is enabled
+        - is displayed
+    """
     def __init__(self, locator, timeout=Timeouts.MEDIUM):
         self.driver = Driver.driver
         self.locator = locator
@@ -41,7 +51,14 @@ class WebElement(object):
 
 
 class Button(WebElement):
+    """
+    Custom WebElement class made for buttons
+    Name the function for each button as: click_element_name
 
+    Specific functions for buttons:
+        - click
+        - javascript_click
+    """
     def __init__(self, locator, timeout=Timeouts.MEDIUM):
         super(Button, self).__init__(locator=locator, timeout=timeout)
         self.driver.wait_for_element_to_be_clickable(self.locator)
@@ -67,6 +84,16 @@ class Button(WebElement):
 
 class TextBox(WebElement):
 
+    """
+    Custom WebElement class made for TextBoxes (Readonly or not)
+    Name the function for each button as: click_element_name
+
+    Specific functions for TextBoxes:
+        - contents (getter & setter) | Ex: x = TextBox(valid_xpath); log(x.contents); x.contents = 'new_string'
+        - clear
+        - send_keys
+
+    """
     def __init__(self, locator, timeout=Timeouts.MEDIUM):
         super(TextBox, self).__init__(locator=locator, timeout=timeout)
 
