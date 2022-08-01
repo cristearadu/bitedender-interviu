@@ -1,13 +1,13 @@
 # bitedender-interviu repository
 
 This project has been written with Python and Gauge framework. At the interview we've had a small discussion about 
-Gauge. So, this testing framework is used in "Specification by Example". The test steps are preferred to be written 
+Gauge. This testing framework is used in "Specification by Example". The test steps are preferred to be written 
 from a 'business' point of view. 
 
 ---
 `pip install -r requirements.txt` - to install the libraries for this framework
 
-So, for this project you need to install Gauge, create a Gauge_Home folder and add 'GAUGE_HOME' sys environment in 
+For this project you need to install Gauge, create a Gauge_Home folder and add 'GAUGE_HOME' sys environment in 
 system variables. Install html-report, python and screenshot using `gauge install {package_name}`. Test using 
 `gauge --version` command to verify the installed plugins on your device.
 ```commandline
@@ -62,7 +62,7 @@ After running the test logs can be found in this folder: `output\logs\*`
 After running the test a report will be created here: `output\reports\index.html` 
 
 In the end, a specific output should be printed inside the terminal like this:
-```
+```commandline
 Logs......
 2022-08-01 22:04:33,968 - INFO: The correct price and product has been displayed in cart
  P2022-08-01 22:04:33,981 - INFO: Removing the product
@@ -77,11 +77,3 @@ Specifications: 1 executed      1 passed        0 failed        0 skipped
 Scenarios:      2 executed      2 passed        0 failed        0 skipped
 
 ```
-
----
-What's left to improve
----
-1. A class called action_pom_page to have functions(@property) to each POM Class in this repository. 
-Thus classes of the whole project won't need to be imported, unless for some specific calls. 
-2. A screenshot class/function to be called whenever is necessary
-3. Other elements to improved are comments written in specific places

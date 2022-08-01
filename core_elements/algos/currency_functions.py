@@ -6,10 +6,6 @@ class CurrencyFunctions:
     Class for currency operations
     """
 
-    # ~ What can be improved ~ create a custom class for price objects with specific parameters for currency
-    # Class PriceObject('$')
-    # Then for each currency type use the functions below and automate the parsing mechanism
-
     RON_CURRENCY = ('RON', 'LEI', 'LEU', 'ron', 'lei', 'leu')
     # pentru euro si dolari am cautat pe bitdefender.fr si bitdefender.com
     EURO_CURRENCY = ('€', 'EUR')
@@ -26,8 +22,6 @@ class CurrencyFunctions:
         """
         Function that checks the same currency for two prices.
         """
-
-        # ~ What can be improved ~ add *args as a parameter
 
         for currency_list in self.LIST_OF_ALL_CURRENCIES:
             if any(currency in price_1 for currency in currency_list) and any(
