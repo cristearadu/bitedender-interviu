@@ -3,6 +3,7 @@ from core_elements import CustomWebDriver
 
 
 class Driver:
+    """Final Driver class that is used for the framework"""
     driver: CustomWebDriver = None
 
     @staticmethod

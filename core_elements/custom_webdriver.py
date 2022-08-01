@@ -9,6 +9,15 @@ from settings import Timeouts
 
 class CustomWebDriver(webdriver.Chrome):
 
+    """
+    Custom WebDriver class created to improve the driver object, to add more functions to it the driver, such as:
+        - wait_for_element_to_be_invisible
+        - wait_for_element_to_be_visible
+        - wait_for_element_to_be_clickable
+        - check_exists
+        - get_locator_by_index
+    """
+
     ELEMENT_NOT_FOUND = (
         "Element with locator {} was not found. Timeout = {} seconds")
 
@@ -52,9 +61,8 @@ class CustomWebDriver(webdriver.Chrome):
         locator_tuple = tuple(locator_list)
         return locator_tuple
 
-########################################
     """
-    Unused functions for webdriver, but implemented for framework
+    Unused functions for webdriver
     """
 
     def open_new_tab(self, url: str):

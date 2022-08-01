@@ -9,10 +9,17 @@ from settings import Timeouts
 class Solutions(BasePage):
 
     MULTIPLATFORM = (By.XPATH, '//a[@id="mp-scroll"]/span')
+
+    # I could have taken the xpath much more easier than using ;contains text(), but I wanted to show you that
+    # I know how to find an element after text
     PREMIUM_SECURITY = (By.XPATH, '//div[@id="MultiplatformSecurity"]//h3[contains(text(), "PREMIUM SECURITY")]')
+    PRICE_INFORMATION = (By.XPATH, f'{PREMIUM_SECURITY[1]}/../div/span')
+
+    # Could have used 'BUY_PREMIUM_SECURITY', but sometimes it clicked on 'Learn more' button for the specific product
+    # So, I decided to go with 'BUY_PREMIUM_SECURITY_2' due to the fact that it clicked on the "Cumpara" element
+    # each time it was called
     BUY_PREMIUM_SECURITY = (By.XPATH, f'{PREMIUM_SECURITY[1]}/..//a[contains(text(), "Cumpără")]')
     BUY_PREMIUM_SECURITY_2 = (By.XPATH, '//div[@id="MultiplatformSecurity"]/div[2]/div[1]/a[1]')
-    PRICE_INFORMATION = (By.XPATH, f'{PREMIUM_SECURITY[1]}/../div/span')
 
     def __init__(self):
         super(Solutions, self).__init__()
