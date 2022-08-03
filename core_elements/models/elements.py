@@ -64,8 +64,9 @@ class Button(WebElement):
         self.driver.wait_for_element_to_be_clickable(self.locator)
 
     @retry(tries=3, delay=1)
-    def click(self, check_element=False):
-        self.scroll_to_element()
+    def click(self, check_element=False, scroll_to=True):
+        if scroll_to:
+            self.scroll_to_element()
         try:
             self.element.click()
             if check_element:
