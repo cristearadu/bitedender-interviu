@@ -41,6 +41,15 @@ class CustomWebDriver(webdriver.Chrome):
     def wait_for_element_to_be_clickable(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT):
         WebDriverWait(self, timeout).until(EC.element_to_be_clickable(locator))
 
+    def wait_for_element_to_have_specific_text(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT,
+                                               text: str = ''):
+        # try:
+        #     x = WebDriverWait(self, timeout).until(EC.text_to_be_present_in_element(locator, text))
+        # except TimeoutException:
+        #     return True
+
+        WebDriverWait(self, timeout).until(CheckTextChanged(text, locator))
+
     def check_exists(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT):
         """
         Return True if element has been located, else returns False
@@ -70,3 +79,17 @@ class CustomWebDriver(webdriver.Chrome):
 
     def switch_tab(self, tab_number: int):
         self.switch_to.window(self.window_handles[tab_number - 1])
+
+
+class CheckTextChanged(object):
+    """
+    Class used for WebDriverWait to check the text of an element has changed upon calling the function
+    """
+
+    def __init__(self, text, locator):
+        self.text = text
+        self.locator = locator
+
+    def __call__(self, driver):
+        new_element = driver.find_element(*self.locator)
+        return new_element.text != self.text

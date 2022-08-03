@@ -4,6 +4,7 @@ from core_elements.models.elements import Button, TextBox
 from core_elements.project_decorators import log_click_button
 from core_elements.pages.base_page import BasePage
 from settings import Timeouts
+from core_elements.algos.currency_functions import CurrencyFunctions
 
 
 class Solutions(BasePage):
@@ -45,14 +46,20 @@ class Solutions(BasePage):
     @retry(tries=3, delay=1)
     @log_click_button
     def click_cumpara_premium_security(self):
-        self.buy_premium_security.click(check_element=True)
+        self.driver.wait_for_element_to_be_visible(self.BUY_PREMIUM_SECURITY)
+        self.buy_premium_security.click(check_element=True, scroll_to=False)
 
     @property
     def old_price(self):
+
+        self.driver.wait_for_element_to_have_specific_text(self.OLD_PRICE_INFORMATION, timeout=Timeouts.SMALL,
+                                                           text='$')
         return TextBox(self.OLD_PRICE_INFORMATION)
 
     @property
     def new_price(self):
+        self.driver.wait_for_element_to_have_specific_text(self.NEW_PRICE_INFORMATION, timeout=Timeouts.SMALL,
+                                                           text='$')
         return TextBox(self.NEW_PRICE_INFORMATION)
 
     def get_price_information_premium_security(self):
