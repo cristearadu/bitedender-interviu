@@ -7,13 +7,14 @@ from core_elements.pages.base_page import BasePage
 
 class HomeScreenPage(BasePage):
 
-    MAIN_MENU_LOGO = (By.XPATH, '//div[@id="MainMenu|BitdefenderLogo"]/a')
-    HOME_SOLUTIONS_BUTTON = (By.XPATH, '//div[@id="Home"]/div/div[2]/div/a')
+    # MAIN_MENU_LOGO = (By.XPATH, '//div[@id="MainMenu|BitdefenderLogo"]/a') # until 03 August
+    # HOME_SOLUTIONS_BUTTON = (By.XPATH, '//div[@id="Home"]/div/div[2]/div/a') # until 03 August
+
+    HOME_SOLUTIONS_BUTTON = (By.XPATH, '//div[@id="container-e892c664a5"]/div/div[3]/section/div/div/div[1]/a')
 
     def __init__(self):
         super(HomeScreenPage, self).__init__()
 
-        self.driver.wait_for_element_to_be_visible(self.MAIN_MENU_LOGO)
         self.driver.wait_for_element_to_be_visible(self.HOME_SOLUTIONS_BUTTON)
 
     @retry(tries=3, delay=1)
