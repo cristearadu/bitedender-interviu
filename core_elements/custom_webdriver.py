@@ -43,11 +43,6 @@ class CustomWebDriver(webdriver.Chrome):
 
     def wait_for_element_to_have_specific_text(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT,
                                                text: str = ''):
-        # try:
-        #     x = WebDriverWait(self, timeout).until(EC.text_to_be_present_in_element(locator, text))
-        # except TimeoutException:
-        #     return True
-
         WebDriverWait(self, timeout).until(CheckTextChanged(text, locator))
 
     def check_exists(self, locator, timeout: int = Timeouts.TIMEOUT_DEFAULT):
