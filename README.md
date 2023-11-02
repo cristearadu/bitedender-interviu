@@ -1,4 +1,4 @@
-# bitedender-interviu repository
+
 
 This project has been written with Python and Gauge framework. At the interview we've had a small discussion about 
 Gauge. This testing framework is used in "Specification by Example". The test steps are preferred to be written 
